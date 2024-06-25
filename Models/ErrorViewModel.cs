@@ -1,4 +1,4 @@
-namespace Fiap.Web.RotaDaReciclagem.ViewModels
+namespace Fiap.Web.RotaDaReciclagem.Models
 {
     public class ErrorViewModel
     {
