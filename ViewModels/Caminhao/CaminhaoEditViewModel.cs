@@ -1,5 +1,4 @@
-﻿using Fiap.Web.RotaDaReciclagem.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Fiap.Web.RotaDaReciclagem.ViewModels.Caminhao
 {
