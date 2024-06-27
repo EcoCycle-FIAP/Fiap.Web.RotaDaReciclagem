@@ -6,6 +6,12 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
     {
         public IActionResult Index()
         {
+            Console.WriteLine(_agendamentos.Count);
+            return View(_agendamentos);
+        }
+
+        [HttpGet]
+        public ActionResult Create() {
             return View();
         }
     }
