@@ -30,7 +30,6 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             }
             else
             {
-                ViewBag.Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaId", "Motorista", rota.CaminhaoId);
                 return View(rota);
             }
         }
@@ -58,6 +57,22 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             TempData["mensagemSucesso"] = $"A rota {rotaModel.RotaId} com o itinerário {rotaModel.PontosDeColeta} foi cadastrada com sucesso.";
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var rota = _context.Rotas.Find(id);
+            if (rota == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                ViewBag.Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista", rota.CaminhaoId);
+                return View(rota);
+            }
+        }
+
 
         [HttpPost]
         public IActionResult Edit(RotaModel rotaModel)
