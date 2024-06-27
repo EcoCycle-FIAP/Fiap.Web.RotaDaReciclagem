@@ -7,7 +7,7 @@
 
         public string Endereco { get; set; }
         public int EnderecoNumero { get; set; }
-        public string EnderecoComplemento { get; set; }
+        public string? EnderecoComplemento { get; set; }
         public string EnderecoBairro { get; set; }
 
         public string Email { get; set; }
