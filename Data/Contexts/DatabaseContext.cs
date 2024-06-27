@@ -6,6 +6,10 @@ namespace Fiap.Web.RotaDaReciclagem.Data.Contexts
     public class DatabaseContext : DbContext
     {
         public DbSet<MoradorModel> Moradores { get; set; }
+        public DbSet<CaminhaoModel> Caminhoes { get; set; }
+        public DbSet<AgendamentoModel> Agendamentos { get; set; }
+        public DbSet<RotaModel> Rotas { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
