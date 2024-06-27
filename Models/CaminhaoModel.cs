@@ -9,5 +9,7 @@
         public int CapacidadeLitros { get; set; }
 
         public List<AgendamentoModel> Agendamentos { get; set; }
+
+        public List<RotaModel> Rotas { get; set; }
     }
 }

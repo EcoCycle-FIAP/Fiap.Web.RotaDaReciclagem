@@ -40,10 +40,19 @@ namespace Fiap.Web.RotaDaReciclagem.Data.Contexts
                 entity.Property(e => e.Data).IsRequired().HasColumnType("DATE");
                 entity.Property(e => e.TipoResiduo).IsRequired();
                 entity.Property(e => e.QuantidadeLitros).IsRequired();
-                entity.HasOne(e => e.Caminhao).WithMany(c => c.Agendamentos).HasForeignKey(e => e.CaminhaoId);
-                entity.HasOne(e => e.Morador).WithMany(m => m.Agendamentos).HasForeignKey(e => e.MoradorId);
+                entity.HasOne(e => e.Caminhao).WithMany(c => c.Agendamentos).HasForeignKey(e => e.CaminhaoId).IsRequired();
+                entity.HasOne(e => e.Morador).WithMany(m => m.Agendamentos).HasForeignKey(e => e.MoradorId).IsRequired();
             });
 
+            modelBuilder.Entity<RotaModel>(entity =>
+            {
+                entity.ToTable("Rotas");
+                entity.HasKey(e => e.RotaId);
+                entity.Property(e => e.PontosDeColeta).IsRequired();
+                entity.Property(e => e.HorarioInicial).IsRequired().HasColumnType("DATE");
+                entity.Property(e => e.HorarioFinal).IsRequired().HasColumnType("DATE");
+                entity.HasOne(e => e.Caminhao).WithMany(c => c.Rotas).HasForeignKey(e => e.CaminhaoId);
+            });
         }
 
         public DatabaseContext(DbContextOptions options) : base(options)
