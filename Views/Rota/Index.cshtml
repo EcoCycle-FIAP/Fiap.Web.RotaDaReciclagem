@@ -1,5 +1,67 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<Fiap.Web.RotaDaReciclagem.Models.RotaModel>
+
+
+<h1>Rotas</h1>
+
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
 }
+
+
+<p>
+    <a asp-controller="Rota" asp-action="Create">Nova Rota</a>
+</p>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pontos de Coleta</th>
+            <th>Horário Inicial</th>
+            <th>Horário Final</th>
+            <th>Caminhão</th>
+            <th>Motorista</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.RotaId</label>
+                </td>
+                <td>
+                    <label>@item.PontosDeColeta</label>
+                </td>
+                <td>
+                    <label>@item.HorarioInicial</label>
+                </td>
+                <td>
+                    <label>@item.HorarioFinal</label>
+                </td>
+                <td>
+                    <label>@item.Caminhao.CaminhaoId</label>
+                </td>
+                <td>
+                    <label>@item.Caminhao.Motorista</label>
+                </td>
+                <td>
+                    <a asp-controller="Rota"
+                       asp-action="Edit"
+                       asp-route-id="@item.RotaId">Editar</a>
+
+                    <a asp-controller="Agendamento"
+                       asp-action="Detail"
+                       asp-route-id="@item.RotaId">Consultar</a>
+
+                    <a asp-controller="Agendamento"
+                       asp-action="Delete"
+                       asp-route-id="@item.RotaId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

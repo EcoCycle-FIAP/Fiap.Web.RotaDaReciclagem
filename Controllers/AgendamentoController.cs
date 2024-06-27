@@ -23,6 +23,26 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
         }
 
         [HttpGet]
+        public IActionResult Create()
+        {
+            var viewModel = new AgendamentoCreateViewModel
+            {
+                Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista"),
+                Moradores = new SelectList(_context.Moradores.ToList(), "MoradorId", "Nome")
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(AgendamentoModel agendamentoModel)
+        {
+            _context.Agendamentos.Add(agendamentoModel);
+            _context.SaveChanges();
+            TempData["mensagemSucesso"] = $"O agendamento {agendamentoModel.AgendamentoId} para o dia {agendamentoModel.Data} foi cadastrado com sucesso.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
         public IActionResult Detail(int id)
         {
             var agendamento = _context.Agendamentos
@@ -63,26 +83,6 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             {
                 return View(agendamentos);
             }
-        }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            var viewModel = new AgendamentoCreateViewModel
-            {
-                Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista"),
-                Moradores = new SelectList(_context.Moradores.ToList(), "MoradorId", "Nome")
-            };
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public IActionResult Create(AgendamentoModel agendamentoModel)
-        {
-            _context.Agendamentos.Add(agendamentoModel);
-            _context.SaveChanges();
-            TempData["mensagemSucesso"] = $"O agendamento {agendamentoModel.AgendamentoId} para o dia {agendamentoModel.Data} foi cadastrado com sucesso.";
-            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]

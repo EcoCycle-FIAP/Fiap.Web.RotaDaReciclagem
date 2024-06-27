@@ -1,5 +1,7 @@
 ﻿using Fiap.Web.RotaDaReciclagem.Data.Contexts;
 using Fiap.Web.RotaDaReciclagem.Models;
+using Fiap.Web.RotaDaReciclagem.ViewModels.Agendamento;
+using Fiap.Web.RotaDaReciclagem.ViewModels.Rota;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,25 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
         {
             var rotas = _context.Rotas.Include(c => c.Caminhao).ToList();
             return View(rotas);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var viewModel = new RotaCreateViewModel
+            {
+                Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista")
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(RotaModel rotaModel)
+        {
+            _context.Rotas.Add(rotaModel);
+            _context.SaveChanges();
+            TempData["mensagemSucesso"] = $"A rota {rotaModel.RotaId} com o itinerário {rotaModel.PontosDeColeta} foi cadastrada com sucesso.";
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -47,15 +68,6 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             {
                 return View(rotas);
             }
-        }
-
-        [HttpPost]
-        public IActionResult Create(RotaModel rotaModel)
-        {
-            _context.Rotas.Add(rotaModel);
-            _context.SaveChanges();
-            TempData["mensagemSucesso"] = $"A rota {rotaModel.RotaId} com o itinerário {rotaModel.PontosDeColeta} foi cadastrada com sucesso.";
-            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
