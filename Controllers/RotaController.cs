@@ -42,17 +42,27 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
         }
 
         [HttpGet]
-        public IActionResult FindById(int id)
+        public IActionResult Detail(int id)
         {
-            var rota = _context.Rotas.Find(id);
+            var rota = _context.Rotas
+                .Include(r => r.Caminhao)
+                .FirstOrDefault(r => r.RotaId == id);
+
             if (rota == null)
             {
                 return NotFound();
             }
-            else
+
+            var viewModel = new RotaDetailViewModel
             {
-                return View(rota);
-            }
+                RotaId = rota.RotaId,
+                PontosDeColeta = rota.PontosDeColeta,
+                HorarioInicial = rota.HorarioInicial,
+                HorarioFinal = rota.HorarioFinal,
+                CaminhaoId = rota.CaminhaoId,
+                Caminhao = rota.Caminhao
+            };
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -108,6 +118,7 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
         public IActionResult Delete(int id)
         {
             var rota = _context.Rotas.Find(id);
+
             if (rota != null)
             {
                 _context.Rotas.Remove(rota);

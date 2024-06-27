@@ -1,0 +1,50 @@
+﻿@model Fiap.Web.RotaDaReciclagem.ViewModels.Rota.RotaDetailViewModel
+
+<h1>Rota</h1>
+
+<h4>Detalhes da Rota</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="RotaId" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.RotaId</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PontosDeColeta" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.PontosDeColeta</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HorarioInicial" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.HorarioInicial</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HorarioFinal" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.HorarioFinal</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CaminhaoId" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.CaminhaoId</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Caminhao.Motorista" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Caminhao.Motorista</span>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
