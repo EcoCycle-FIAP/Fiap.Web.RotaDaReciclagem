@@ -1,9 +1,7 @@
 ﻿using Fiap.Web.RotaDaReciclagem.Data.Contexts;
 using Fiap.Web.RotaDaReciclagem.Models;
-using Fiap.Web.RotaDaReciclagem.ViewModels.Agendamento;
 using Fiap.Web.RotaDaReciclagem.ViewModels.Caminhao;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.RotaDaReciclagem.Controllers
