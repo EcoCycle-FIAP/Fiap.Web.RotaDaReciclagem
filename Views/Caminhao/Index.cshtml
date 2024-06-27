@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Fiap.Web.RotaDaReciclagem.Models.CaminhaoModel>
+
+<h1>Caminhões</h1>
+
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]!))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
+}
+
+<p>
+    <a asp-controller="Caminhao" asp-action="Create">Novo Caminhão</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Motorista</th>
+            <th>Modelo</th>
+            <th>Placa</th>
+            <th>Capacidade (L)</th>
+            <th>Agendamentos</th>
+            <th>Rotas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.CaminhaoId</label>
+                </td>
+                <td>
+                    <label>@item.Motorista</label>
+                </td>
+                <td>
+                    <label>@item.Modelo</label>
+                </td>
+                <td>
+                    <label>@item.Placa</label>
+                </td>
+                <td>
+                    <label>@item.CapacidadeLitros</label>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var agendamento in item.Agendamentos!)
+                        {
+                            <li>ID - @agendamento.AgendamentoId</li>
+                            <li>Data e Hora - @agendamento.Data</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var rota in item.Rotas!)
+                        {
+                            <li>ID - @rota.RotaId</li>
+                            <li>PontosColeta - @rota.PontosDeColeta</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+                    <a asp-controller="Caminhao"
+                       asp-action="Edit"
+                       asp-route-id="@item.CaminhaoId">Editar</a>
+
+                    <a asp-controller="Caminhao"
+                       asp-action="Detail"
+                       asp-route-id="@item.CaminhaoId">Consultar</a>
+
+                    <a asp-controller="Caminhao"
+                       asp-action="Delete"
+                       asp-route-id="@item.CaminhaoId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

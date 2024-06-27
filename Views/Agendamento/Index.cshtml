@@ -1,18 +1,15 @@
 ﻿@model IEnumerable<Fiap.Web.RotaDaReciclagem.Models.AgendamentoModel>
 
-
 <h1>Agendamentos</h1>
 
-@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]))
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]!))
 {
     <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
 }
 
-
 <p>
     <a asp-controller="Agendamento" asp-action="Create">Novo Agendamento</a>
 </p>
-
 
 
 <table class="table">
@@ -44,10 +41,10 @@
                     <label>@item.QuantidadeLitros</label>
                 </td>
                 <td>
-                    <label>@item.Morador.Nome</label>
+                    <label>@item.Morador!.Nome</label>
                 </td>
                 <td>
-                    <label>@item.Caminhao.CaminhaoId</label>
+                    <label>@item.Caminhao!.CaminhaoId</label>
                 </td>
                 <td>
                     <label>@item.Caminhao.Motorista</label>
