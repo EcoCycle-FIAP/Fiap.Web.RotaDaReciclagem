@@ -1,0 +1,52 @@
+﻿@model Fiap.Web.RotaDaReciclagem.ViewModels.Agendamento.AgendamentoEditViewModel
+
+<h1>Agendamento</h1>
+
+<h4>Editar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="Agendamento">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="AgendamentoId" />
+
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control"/>
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoResiduo" class="control-label"></label>
+                <input asp-for="TipoResiduo" class="form-control" />
+                <span asp-validation-for="TipoResiduo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantidadeLitros" class="control-label"></label>
+                <input asp-for="QuantidadeLitros" class="form-control" />
+                <span asp-validation-for="QuantidadeLitros" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaminhaoId" class="control-label"></label>
+                <select asp-for="CaminhaoId" asp-items="@Model.Caminhoes" class="form-select">
+                    <option value="0">Selecione</option>
+                </select>
+                <span asp-validation-for="CaminhaoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoradorId" class="control-label"></label>
+                <select asp-for="MoradorId" asp-items="@Model.Moradores" class="form-select">
+                    <option value="0">Selecione</option>
+                </select>
+                <span asp-validation-for="MoradorId" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-action="EditPost" type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
