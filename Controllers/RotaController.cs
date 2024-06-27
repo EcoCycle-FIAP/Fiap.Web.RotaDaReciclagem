@@ -80,13 +80,22 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             }
             else
             {
-                ViewBag.Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista", rota.CaminhaoId);
-                return View(rota);
+                var viewModel = new RotaEditViewModel
+                {
+                    RotaId = rota.RotaId,
+                    PontosDeColeta = rota.PontosDeColeta,
+                    HorarioInicial = rota.HorarioInicial,
+                    HorarioFinal = rota.HorarioFinal,
+                    CaminhaoId = rota.CaminhaoId,
+                    Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista", rota.CaminhaoId)
+                };
+                return View(viewModel);
             }
         }
 
 
         [HttpPost]
+        [ActionName("EditPost")]
         public IActionResult Edit(RotaModel rotaModel)
         {
             _context.Update(rotaModel);

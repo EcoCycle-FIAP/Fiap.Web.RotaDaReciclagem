@@ -1,0 +1,45 @@
+﻿@model Fiap.Web.RotaDaReciclagem.ViewModels.Rota.RotaEditViewModel
+
+<h1>Rota</h1>
+
+<h4>Editar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="Rota">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="RotaId" />
+
+            <div class="form-group">
+                <label asp-for="PontosDeColeta" class="control-label"></label>
+                <input asp-for="PontosDeColeta" class="form-control" />
+                <span asp-validation-for="PontosDeColeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HorarioInicial" class="control-label"></label>
+                <input asp-for="HorarioInicial" class="form-control" />
+                <span asp-validation-for="HorarioInicial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HorarioFinal" class="control-label"></label>
+                <input asp-for="HorarioFinal" class="form-control" />
+                <span asp-validation-for="HorarioFinal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaminhaoId" class="control-label"></label>
+                <select asp-for="CaminhaoId" asp-items="@Model.Caminhoes" class="form-select">
+                    <option value="0">Selecione</option>
+                </select>
+                <span asp-validation-for="CaminhaoId" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-action="EditPost" type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
