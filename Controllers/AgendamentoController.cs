@@ -23,12 +23,30 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
         }
 
         [HttpGet]
-        public IActionResult FindById(int id)
+        public IActionResult Detail(int id)
         {
-            var agendamento = _context.Agendamentos.Find(id);
-            if (agendamento == null) return NotFound();
+            var agendamento = _context.Agendamentos
+                                         .Include(a => a.Caminhao)
+                                         .Include(a => a.Morador)
+                                         .FirstOrDefault(a => a.AgendamentoId == id);
 
-            return View(agendamento);
+            if (agendamento == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new AgendamentoDetailViewModel
+            {
+                AgendamentoId = agendamento.AgendamentoId,
+                Data = agendamento.Data,
+                TipoResiduo = agendamento.TipoResiduo,
+                QuantidadeLitros = agendamento.QuantidadeLitros,
+                Morador = agendamento.Morador,
+                CaminhaoId = agendamento.CaminhaoId,
+                Caminhao = agendamento.Caminhao,
+            };
+
+            return View(viewModel);
 
         }
 

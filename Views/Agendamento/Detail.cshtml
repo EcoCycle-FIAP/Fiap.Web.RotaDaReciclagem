@@ -1,0 +1,56 @@
+﻿@model Fiap.Web.RotaDaReciclagem.ViewModels.Agendamento.AgendamentoDetailViewModel
+
+<h1>Agendamento</h1>
+
+<h4>Detalhes do Agendamento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="AgendamentoId" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.AgendamentoId</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Data" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Data</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TipoResiduo" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.TipoResiduo</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="QuantidadeLitros" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.QuantidadeLitros</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Morador.Nome" class="control-label fw-bold">Nome do Morador</label>
+            <div class="col-md-10">
+                <span>@Model.Morador.Nome</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CaminhaoId" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.CaminhaoId</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Caminhao.Motorista" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Caminhao.Motorista</span>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
