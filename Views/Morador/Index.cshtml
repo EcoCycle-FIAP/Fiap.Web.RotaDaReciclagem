@@ -1,3 +1,83 @@
-﻿@{
-    Layout = null;
+﻿@model IEnumerable<Fiap.Web.RotaDaReciclagem.Models.MoradorModel>
+
+<h1>Moradores</h1>
+
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]!))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
 }
+
+<p>
+    <a asp-controller="Morador" asp-action="Create">Novo Morador</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Nº Endereço</th>
+            <th>Complemento</th>
+            <th>Bairro</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Agendamentos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.MoradorId</label>
+                </td>
+                <td>
+                    <label>@item.Nome</label>
+                </td>
+                <td>
+                    <label>@item.Endereco</label>
+                </td>
+                <td>
+                    <label>@item.EnderecoNumero</label>
+                </td>
+                <td>
+                    <label>@item.EnderecoComplemento</label>
+                </td>
+                <td>
+                    <label>@item.EnderecoBairro</label>
+                </td>
+                <td>
+                    <label>@item.Email</label>
+                </td>
+                <td>
+                    <label>@item.Telefone</label>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var agendamento in item.Agendamentos!)
+                        {
+                            <li>ID - @agendamento.AgendamentoId</li>
+                            <li>Data e Hora - @agendamento.Data</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+                    <a asp-controller="Morador"
+                       asp-action="Edit"
+                       asp-route-id="@item.MoradorId">Editar</a>
+
+                    <a asp-controller="Morador"
+                       asp-action="Detail"
+                       asp-route-id="@item.MoradorId">Consultar</a>
+
+                    <a asp-controller="Morador"
+                       asp-action="Delete"
+                       asp-route-id="@item.MoradorId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

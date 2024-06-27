@@ -97,7 +97,8 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
                     EnderecoComplemento = morador.EnderecoComplemento,
                     EnderecoBairro = morador.EnderecoBairro,
                     Email = morador.Email,
-                    Telefone = morador.Telefone
+                    Telefone = morador.Telefone,
+                    Senha = morador.Senha
                 };
                 return View(viewModel);
             }
@@ -131,6 +132,7 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
                 morador.EnderecoBairro = viewModel.EnderecoBairro;
                 morador.Email = viewModel.Email;
                 morador.Telefone = viewModel.Telefone;
+                morador.Senha = viewModel.Senha;
 
                 _context.Update(morador);
                 _context.SaveChanges();

@@ -40,5 +40,7 @@ namespace Fiap.Web.RotaDaReciclagem.ViewModels.Morador
         [Display(Name = "Telefone")]
         [StringLength(15, MinimumLength = 15, ErrorMessage = "O Nº do telefone deve ter exatamente 15 caracteres.")]
         public string? Telefone { get; set; }
+
+        public string? Senha { get; set; }
     }
 }
