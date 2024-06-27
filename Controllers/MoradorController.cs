@@ -5,8 +5,7 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
     public class MoradorController : Controller
     {
         public IActionResult Index() {
-            Console.WriteLine(_moradores.Count);
-            return View(_moradores);
+            return View();
         }
 
         [HttpGet]

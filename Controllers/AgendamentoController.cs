@@ -4,7 +4,6 @@ using Fiap.Web.RotaDaReciclagem.ViewModels.Agendamento;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Fiap.Web.RotaDaReciclagem.Controllers
 {
@@ -47,7 +46,6 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             };
 
             return View(viewModel);
-
         }
 
         [HttpGet]

@@ -15,7 +15,7 @@ namespace Fiap.Web.RotaDaReciclagem.ViewModels.Agendamento
         [Required(ErrorMessage = "É obrigatório informar o tipo de resíduo.")]
         [Display(Name = "Tipo de Resíduo")]
         [StringLength(60, ErrorMessage = "O tipo de resíduo não pode exceder 60 caracteres.")]
-        public string TipoResiduo { get; set; }
+        public string? TipoResiduo { get; set; }
 
         [Required(ErrorMessage = "É obrigatório informar a quantidade em litros.")]
         [Display(Name = "Quantidade (L)")]
