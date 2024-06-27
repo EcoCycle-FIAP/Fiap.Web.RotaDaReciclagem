@@ -1,0 +1,43 @@
+﻿@model Fiap.Web.RotaDaReciclagem.ViewModels.Caminhao.CaminhaoEditViewModel
+
+<h1>Caminhão</h1>
+
+<h4>Editar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="Caminhao">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="CaminhaoId" />
+
+            <div class="form-group">
+                <label asp-for="Motorista" class="control-label"></label>
+                <input asp-for="Motorista" class="form-control" />
+                <span asp-validation-for="Motorista" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Modelo" class="control-label"></label>
+                <input asp-for="Modelo" class="form-control" />
+                <span asp-validation-for="Modelo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Placa" class="control-label"></label>
+                <input asp-for="Placa" class="form-control" />
+                <span asp-validation-for="Placa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CapacidadeLitros" class="control-label"></label>
+                <input asp-for="CapacidadeLitros" class="form-control" />
+                <span asp-validation-for="CapacidadeLitros" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-action="EditPost" type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>

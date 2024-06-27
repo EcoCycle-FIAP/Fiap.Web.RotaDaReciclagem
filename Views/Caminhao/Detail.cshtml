@@ -1,0 +1,44 @@
+﻿@model Fiap.Web.RotaDaReciclagem.ViewModels.Caminhao.CaminhaoDetailViewModel
+
+<h1>Caminhão</h1>
+
+<h4>Detalhes do Caminhão</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="CaminhaoId" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.CaminhaoId</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Motorista" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Motorista</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Modelo" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Modelo</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Placa" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Placa</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CapacidadeLitros" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.CapacidadeLitros</span>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
