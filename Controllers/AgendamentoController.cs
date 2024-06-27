@@ -1,5 +1,6 @@
 ﻿using Fiap.Web.RotaDaReciclagem.Data.Contexts;
 using Fiap.Web.RotaDaReciclagem.Models;
+using Fiap.Web.RotaDaReciclagem.ViewModels.Agendamento;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,17 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var viewModel = new AgendamentoCreateViewModel
+            {
+                Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista"),
+                Moradores = new SelectList(_context.Moradores.ToList(), "MoradorId", "Nome")
+            };
+            return View(viewModel);
+        }
+
         [HttpPost]
         public IActionResult Create(AgendamentoModel agendamentoModel)
         {
@@ -69,13 +81,23 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             }
             else
             {
-                ViewBag.Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista", agendamento.CaminhaoId);
-                ViewBag.Moradores = new SelectList(_context.Moradores.ToList(), "MoradorId", "Nome", agendamento.MoradorId);
-                return View(agendamento);
+                var viewModel = new AgendamentoEditViewModel
+                {
+                    AgendamentoId = agendamento.AgendamentoId,
+                    Data = agendamento.Data,
+                    TipoResiduo = agendamento.TipoResiduo,
+                    QuantidadeLitros = agendamento.QuantidadeLitros,
+                    CaminhaoId = agendamento.CaminhaoId,
+                    MoradorId = agendamento.MoradorId,
+                    Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista", agendamento.CaminhaoId),
+                    Moradores = new SelectList(_context.Moradores.ToList(), "MoradorId", "Nome", agendamento.MoradorId)
+                };
+                return View(viewModel);
             }
         }
 
         [HttpPost]
+        [ActionName("EditPost")]
         public IActionResult Edit(AgendamentoModel agendamentoModel)
         {
             _context.Update(agendamentoModel);
@@ -85,20 +107,33 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult Edit(AgendamentoEditViewModel viewModel)
         {
-            var agendamento = _context.Agendamentos.Find(id);
-            if (agendamento != null)
+            if (ModelState.IsValid)
             {
-                _context.Agendamentos.Remove(agendamento);
+                var agendamento = _context.Agendamentos.Find(viewModel.AgendamentoId);
+                if (agendamento == null)
+                {
+                    return NotFound();
+                }
+
+                agendamento.Data = viewModel.Data;
+                agendamento.TipoResiduo = viewModel.TipoResiduo;
+                agendamento.QuantidadeLitros = viewModel.QuantidadeLitros;
+                agendamento.CaminhaoId = viewModel.CaminhaoId;
+                agendamento.MoradorId = viewModel.MoradorId;
+
+                _context.Update(agendamento);
                 _context.SaveChanges();
-                TempData["mensagemSucesso"] = $"O agendamento {agendamento.AgendamentoId}, para o dia e horário {agendamento.Data}, foi cancelado com sucesso.";
+
+                TempData["mensagemSucesso"] = $"O agendamento {agendamento.AgendamentoId} foi alterado com sucesso e agora será na data e horário: {agendamento.Data}.";
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                TempData["mensagemFracasso"] = "Perdão, mas não temos um agendamento com esse id em nossa base de dados.";
-            }
-            return RedirectToAction(nameof(Index));
+
+            // Se houver erros de validação, recarrega a view com os dados da view model e as listas de seleção
+            viewModel.Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista", viewModel.CaminhaoId);
+            viewModel.Moradores = new SelectList(_context.Moradores.ToList(), "MoradorId", "Nome", viewModel.MoradorId);
+            return View(viewModel);
         }
     }
 }
