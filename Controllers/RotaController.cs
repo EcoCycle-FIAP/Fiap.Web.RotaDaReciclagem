@@ -35,6 +35,21 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult FindByPontoDeColeta(string pontoDeColeta)
+        {
+            var rotas = _context.Rotas.Where(r => r.PontosDeColeta.Contains(pontoDeColeta)).ToList();
+
+            if (rotas.Count == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View(rotas);
+            }
+        }
+
         [HttpPost]
         public IActionResult Create(RotaModel rotaModel)
         {
