@@ -26,14 +26,10 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
         public IActionResult FindById(int id)
         {
             var agendamento = _context.Agendamentos.Find(id);
-            if (agendamento == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return View(agendamento);
-            }
+            if (agendamento == null) return NotFound();
+
+            return View(agendamento);
+
         }
 
         [HttpGet]
@@ -134,6 +130,24 @@ namespace Fiap.Web.RotaDaReciclagem.Controllers
             viewModel.Caminhoes = new SelectList(_context.Caminhoes.ToList(), "CaminhaoId", "Motorista", viewModel.CaminhaoId);
             viewModel.Moradores = new SelectList(_context.Moradores.ToList(), "MoradorId", "Nome", viewModel.MoradorId);
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var agendamento = _context.Agendamentos.Find(id);
+
+            if (agendamento != null)
+            {
+                _context.Agendamentos.Remove(agendamento);
+                _context.SaveChanges();
+                TempData["mensagemSucesso"] = $"O agendamento {agendamento.AgendamentoId}, que havia sido feito para {agendamento.Data}, foi removido com sucesso.";
+            }
+            else
+            {
+                TempData["mensagemFracasso"] = "Perdão, mas não temos uma rota com esse id em nossa base de dados.";
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
