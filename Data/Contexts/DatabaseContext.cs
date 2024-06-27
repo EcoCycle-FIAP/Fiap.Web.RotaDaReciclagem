@@ -32,6 +32,18 @@ namespace Fiap.Web.RotaDaReciclagem.Data.Contexts
                 entity.Property(e => e.Placa).IsRequired();
                 entity.Property(e => e.CapacidadeLitros).IsRequired();
             });
+
+            modelBuilder.Entity<AgendamentoModel>(entity =>
+            {
+                entity.ToTable("Agendamentos");
+                entity.HasKey(e => e.AgendamentoId);
+                entity.Property(e => e.Data).IsRequired().HasColumnType("DATE");
+                entity.Property(e => e.TipoResiduo).IsRequired();
+                entity.Property(e => e.QuantidadeLitros).IsRequired();
+                entity.HasOne(e => e.Caminhao).WithMany(c => c.Agendamentos).HasForeignKey(e => e.CaminhaoId);
+                entity.HasOne(e => e.Morador).WithMany(m => m.Agendamentos).HasForeignKey(e => e.MoradorId);
+            });
+
         }
 
         public DatabaseContext(DbContextOptions options) : base(options)

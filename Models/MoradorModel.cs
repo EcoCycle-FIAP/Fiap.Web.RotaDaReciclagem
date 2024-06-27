@@ -14,5 +14,7 @@
         public string Telefone { get; set; }
         public string Senha { get; set; }
 
+        public List<AgendamentoModel> Agendamentos { get; set; }
+
     }
 }
